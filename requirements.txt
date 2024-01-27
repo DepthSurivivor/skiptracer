@@ -30,4 +30,4 @@ tqdm==4.47.0
 traitlets==4.3.3
 urllib3==1.25.9
 wcwidth==0.2.5
--e git+https://github.com/xillwillx/skiptracer.git
+git+https://github.com/xillwillx/skiptracer.git
