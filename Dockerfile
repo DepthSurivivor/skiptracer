@@ -1,26 +1,23 @@
-FROM python:3.7-slim
-
-MAINTAINER sietekk "sietekk@gmail.com"
-
-COPY requirements.txt /app/requirements.txt
-
-RUN pip3 install --no-cache-dir -r /app/requirements.txt
-
-COPY  . /app
-
-WORKDIR /app/src
-
+# Use Ubuntu as the base image
 FROM ubuntu:latest
-MAINTAINER Furkan SAYIM <furkan.sayim@yandex.com>
 
-RUN apt-get update \
-    && apt-get install git -y \
-    && apt-get install python -y \
-    && apt-get install python-pip -y \
-    && git clone https://github.com/xillwillx/skiptracer.git
+# Set maintainer label
+LABEL maintainer="Furkan SAYIM <furkan.sayim@yandex.com>"
 
-RUN pip install -r skiptracer/requirements.txt
+# Install Git, Python 3, and pip
+RUN apt-get update && \
+    apt-get install -y git python3 python3-pip
 
-CMD python skiptracer.py
+# Clone the skiptracer repository
+RUN git clone https://github.com/xillwillx/skiptracer.git
 
+
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir -r skiptracer/requirements.txt
+
+# Set the working directory
 WORKDIR /skiptracer
+
+# Set the command to run the application
+CMD ["python3", "skiptracer.py"]
